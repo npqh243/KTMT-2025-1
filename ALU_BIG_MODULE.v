@@ -88,6 +88,7 @@ module ALU_CONTROL (
     localparam OP_ANDI      = 3'b011;
     localparam OP_ORI       = 3'b100;
     localparam OP_XORI      = 3'b101;
+    localparam OP_SLTI      = 3'b110;
 
     // Định nghĩa output điều khiển ALU Core (phải khớp module ALU)
     localparam SEL_ADD = 3'b000;
@@ -95,6 +96,7 @@ module ALU_CONTROL (
     localparam SEL_AND = 3'b010;
     localparam SEL_OR  = 3'b011;
     localparam SEL_XOR = 3'b100;
+    localparam SEL_SLT = 3'b101;
 
     always @(*) begin
         case (ALU_Op)
@@ -108,6 +110,7 @@ module ALU_CONTROL (
             OP_ANDI:      ALU_Sel = SEL_AND;
             OP_ORI:       ALU_Sel = SEL_OR;
             OP_XORI:      ALU_Sel = SEL_XOR;
+            OP_SLTI:      ALU_Sel = SEL_SLT; // SLT thường dùng phép trừ để so sánh
 
             // 4. Trường hợp R-Type -> Phụ thuộc vào Funct
             OP_R_TYPE: begin
@@ -142,6 +145,7 @@ module ALU (
     localparam ALU_AND = 3'b010;
     localparam ALU_OR  = 3'b011;
     localparam ALU_XOR = 3'b100;
+    localparam ALU_SLT = 3'b101;
 
     always @(*) begin
         case (ALU_Sel)
@@ -150,6 +154,7 @@ module ALU (
             ALU_AND: ALU_Out = ALU_In_0 & ALU_In_1;
             ALU_OR : ALU_Out = ALU_In_0 | ALU_In_1;
             ALU_XOR: ALU_Out = ALU_In_0 ^ ALU_In_1;
+            ALU_SLT: ALU_Out = (ALU_In_0 < ALU_In_1) ? 32'd1 : 32'd0;
             default: ALU_Out = 32'd0;
         endcase
     end

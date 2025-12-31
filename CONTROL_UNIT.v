@@ -12,6 +12,7 @@ module CONTROL_UNIT (
     localparam andi   = 6'h0C;
     localparam ori    = 6'h0D;
     localparam xori   = 6'h0E;
+    localparam slti   = 6'h0F;
     localparam lw     = 6'h23;
     localparam sw     = 6'h2B;
     
@@ -58,6 +59,10 @@ module CONTROL_UNIT (
             xori: begin
                 alu_src = 1; reg_write = 1;
                 alu_op = 3'b101; 
+            end
+            slti: begin
+                alu_src = 1; reg_write = 1;
+                alu_op = 3'b110; // Mapping sang SLT
             end
             
             // JUMP
