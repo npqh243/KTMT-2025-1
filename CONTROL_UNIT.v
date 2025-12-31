@@ -9,10 +9,10 @@ module CONTROL_UNIT (
     localparam j      = 6'h02;
     localparam beq    = 6'h04;
     localparam addi   = 6'h08;
+    localparam slti   = 6'h0A;
     localparam andi   = 6'h0C;
     localparam ori    = 6'h0D;
     localparam xori   = 6'h0E;
-    localparam slti   = 6'h0F;
     localparam lw     = 6'h23;
     localparam sw     = 6'h2B;
     
